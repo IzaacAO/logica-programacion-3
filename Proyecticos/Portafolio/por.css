@@ -1,0 +1,267 @@
+@font-face {
+    font-family: "Compacta Bold";
+    src: url("https://db.onlinewebfonts.com/t/f0d74efcb3514ddd8b40798b589948d1.woff2") format("woff2"),
+         url("https://db.onlinewebfonts.com/t/f0d74efcb3514ddd8b40798b589948d1.woff") format("woff"),
+         url("https://db.onlinewebfonts.com/t/f0d74efcb3514ddd8b40798b589948d1.ttf") format("truetype");
+}
+
+:root {
+    --morado: #9d3bff;
+    --morado-claro: #c78bff;
+    --brillo: rgba(157, 59, 255, 0.45);
+    --fondo: #08060b;
+    --tarjeta: #130f1a;
+    --metal: #3a3444;
+    --fuente-titulo: "Compacta Bold", Impact, "Arial Narrow", sans-serif;
+}
+
+body {
+    background-color: var(--fondo);
+    background-image:
+        linear-gradient(rgba(157, 59, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 59, 255, 0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    color: #e1e1e6;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 90px 0 60px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.07;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* ---------- Títulos ---------- */
+h1, h2, h3 {
+    font-family: var(--fuente-titulo);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+}
+
+/* Título*/
+.titulo-seccion {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 1.4rem;
+    color: var(--morado-claro);
+}
+
+.titulo-seccion::before,
+.titulo-seccion::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--morado));
+}
+
+.titulo-seccion::after {
+    transform: scaleX(-1);
+}
+
+/* Nombre grande */
+#yo {
+    margin: 20px 0 10px;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    line-height: 1;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px var(--brillo), 0 0 6px var(--morado);
+}
+
+/* ---------- Pantalla de bienvenida ---------- */
+#intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(20, 8, 32, 0.96), rgba(0, 0, 0, 0.98));
+    z-index: 9998;
+    cursor: pointer;
+    transition: opacity 0.6s;
+}
+
+#intro-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.enter-hint {
+    position: absolute;
+    bottom: 18%;
+    width: 100%;
+    text-align: center;
+    color: var(--morado-claro);
+    letter-spacing: 2px;
+    animation: parpadeo 1.8s infinite;
+}
+
+@keyframes parpadeo {
+    50% { opacity: 0.35; }
+}
+
+/* ---------- Logo ---------- */
+#interactive-logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.8s;
+}
+
+#interactive-logo.corner-mode {
+    top: 20px;
+    left: 20px;
+    transform: none;
+    flex-direction: row;
+    padding: 8px 18px 8px 8px;
+    background: rgba(19, 15, 26, 0.92);
+    border: 1px solid var(--morado);
+    border-radius: 50px;
+    box-shadow: 0 0 18px var(--brillo);
+}
+
+.logo-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    box-shadow: 0 0 25px var(--brillo);
+    transition: all 0.8s;
+}
+
+.corner-mode .logo-avatar {
+    width: 48px;
+    height: 48px;
+    box-shadow: none;
+}
+
+#logo-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.logo-avatar.talking {
+    animation: latir 0.3s infinite alternate;
+}
+
+@keyframes latir {
+    to { transform: scale(1.1); }
+}
+
+#speech-bubble {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: var(--morado);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.corner-mode #speech-bubble {
+    margin: 0 0 0 12px;
+    padding: 0;
+    background: none;
+    color: var(--morado-claro);
+    font-size: 0.9rem;
+}
+
+/* ---------- Proyectos ---------- */
+.project-card {
+    background: linear-gradient(160deg, #1c1427, var(--tarjeta) 60%);
+    border: 1px solid var(--metal);
+    border-radius: 4px;
+    color: #e1e1e6;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    border-color: var(--morado);
+    box-shadow: 0 0 25px var(--brillo);
+}
+
+.project-card h3 {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+/* esquinas moradas */
+.project-card::before,
+.project-card::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 0 solid var(--morado);
+}
+
+.project-card::before {
+    top: -1px;
+    left: -1px;
+    border-top-width: 3px;
+    border-left-width: 3px;
+}
+
+.project-card::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+}
+
+.btn-outline-purple {
+    border: 1px solid var(--morado);
+    border-radius: 2px;
+    color: var(--morado-claro);
+    letter-spacing: 1px;
+    transition: all 0.25s;
+}
+
+.btn-outline-purple:hover {
+    background: var(--morado);
+    color: #fff;
+    box-shadow: 0 0 18px var(--brillo);
+}
+
+.maletin {
+    border: 2px solid var(--metal);
+    border-radius: 6px;
+    box-shadow: 0 0 40px var(--brillo);
+}
+
+.tecnologia {
+    padding: 6px 16px;
+    background: #100c16;
+    border: 1px solid var(--metal);
+    border-radius: 2px;
+    color: #dcc6ff;
+    font-size: 0.9rem;
+    transition: all 0.25s;
+}
+
+.tecnologia:hover {
+    border-color: var(--morado);
+    box-shadow: 0 0 12px var(--brillo);
+    color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}
